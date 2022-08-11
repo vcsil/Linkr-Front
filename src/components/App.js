@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyle from "./shared/styles/globalStyles.js";
 
+import Hashtag from "./pages/Hashtag.js";
+
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -9,7 +11,9 @@ export default function App() {
         <BrowserRouter>
             <GlobalStyle />
             <Routes>
-
+                {/* route created only for tests */}
+                <Route path="/hashtag" element={<Hashtag />} />
+                {/* fim route created only for tests */}
             </Routes>
         </BrowserRouter>
     );
