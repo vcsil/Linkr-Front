@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import SignIn from "./SignIn";
+import SignOut from "./SignOut";
 
 function TelaSignInOut() {
     const currentRoute = useLocation().pathname;
@@ -11,7 +12,7 @@ function TelaSignInOut() {
         <Container>
             <LeftSide>
                 <LeftText>
-                    <h1>linkr</h1>
+                    <h1 style={{ cursor: "default" }}>linkr</h1>
                     <p>
                         save, share and discover
                         <br />
@@ -20,7 +21,7 @@ function TelaSignInOut() {
                 </LeftText>
             </LeftSide>
             <RightSide>
-                {currentRoute === "/" ? <SignIn /> : <h1>Ai papai</h1>}
+                {currentRoute === "/" ? <SignIn /> : <SignOut />}
             </RightSide>
         </Container>
     );
