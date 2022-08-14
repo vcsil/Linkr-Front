@@ -6,14 +6,14 @@ import { API_URL } from "../App.js";
 
 export default function PageHashtag() {
     const { hashtag } = useParams();
-    const [ hashtagPosts, setHashtagPosts ] = useState([]);
+    const [hashtagPosts, setHashtagPosts] = useState([]);
 
     useEffect(() => {
         const URL = `${API_URL}/hashtag/${hashtag}`;
         const config = {
             headers: {
-                Authorization: `Bearer ${token}`
-            }
+                // Authorization: `Bearer ${token}`
+            },
         };
 
         axios
@@ -22,9 +22,11 @@ export default function PageHashtag() {
                 setHashtagPosts(data);
             })
             .catch(() => {
-                console.log("It was not possible to make this request, try again later!");
-            })
+                console.log(
+                    "It was not possible to make this request, try again later!"
+                );
+            });
     }, []);
 
     return;
-};
+}
