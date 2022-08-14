@@ -5,7 +5,7 @@ import Hashtag from "./pages/Hashtag.js";
 import PageHashtag from "./pages/PageHashtag.js";
 
 import dotenv from "dotenv";
-import TelaSignInOut from "./pages/PageSignInOut/TelaSignInOut.js";
+import TelaSignInUp from "./pages/PageSignInUp/TelaSignInUp.js";
 dotenv.config();
 
 export default function App() {
@@ -13,8 +13,8 @@ export default function App() {
         <BrowserRouter>
             <GlobalStyle />
             <Routes>
-                <Route path="/" element={<TelaSignInOut />} />
-                <Route path="/sign-up" element={<TelaSignInOut />} />
+                <Route path="/" element={<TelaSignInUp />} />
+                <Route path="/sign-up" element={<TelaSignInUp />} />
                 {/* route created only for tests */}
                 <Route path="/hashtag" element={<Hashtag />} />
                 {/* fim route created only for tests */}
