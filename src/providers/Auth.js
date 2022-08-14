@@ -6,6 +6,7 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState({
         username: "",
         email: "",
+        profile_img_url: "",
         token: "",
         entrou: false,
     });
@@ -17,6 +18,7 @@ export function AuthProvider({ children }) {
                 ...user,
                 username: objetoUsuario.username,
                 email: objetoUsuario.email,
+                profile_img_url: objetoUsuario.profile_img_url,
                 token: objetoUsuario.token,
                 entrou: objetoUsuario.entrou,
             });

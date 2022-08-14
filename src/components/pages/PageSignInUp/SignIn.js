@@ -31,11 +31,11 @@ function SignIn() {
     }
 
     function entrando(props) {
-        console.log(props);
         setUser({
             ...user,
             username: props.username,
             email: props.email,
+            profile_img_url: props.profile_img_url,
             token: props.token,
             entrou: true,
         });
@@ -43,6 +43,7 @@ function SignIn() {
         const dadosSerializados = JSON.stringify({
             username: props.username,
             email: props.email,
+            profile_img_url: props.profile_img_url,
             token: props.token,
             entrou: true,
         });
