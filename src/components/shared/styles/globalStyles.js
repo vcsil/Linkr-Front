@@ -154,16 +154,16 @@ const GlobalStyle = createGlobalStyle`
     }
 
     @keyframes growDown {
-    0% {
-        transform: scaleY(0)
+        0% {
+            transform: scaleY(0)
+        }
+        80% {
+            transform: scaleY(1.1)
+        }
+        100% {
+            transform: scaleY(1)
+        }
     }
-    80% {
-        transform: scaleY(1.1)
-    }
-    100% {
-        transform: scaleY(1)
-    }
-}
 `;
 
 export default GlobalStyle;
