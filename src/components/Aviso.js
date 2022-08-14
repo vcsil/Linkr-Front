@@ -65,6 +65,9 @@ const BoxAviso = styled.div`
     justify-content: space-between;
     align-items: center;
 
+    -webkit-animation: scale-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: scale-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
     h2 {
         font-size: 24px;
         text-align: center;
