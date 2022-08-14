@@ -1,21 +1,91 @@
-import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { Bars } from "react-loader-spinner";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 import Aviso from "../../Aviso";
+import { API_URL } from "../../App";
+import { AuthContext } from "../../../providers/Auth";
 
 function SignIn() {
+    const { user, setUser } = React.useContext(AuthContext);
+
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [carregando, setCarregando] = useState(false);
+    const [mostraAviso, setMostraAviso] = useState([]);
+
+    function BoxAviso(mensagem) {
+        setMostraAviso([
+            ...mostraAviso,
+            <Aviso key={0} mensagem={mensagem} ok={() => setMostraAviso([])} />,
+        ]);
+    }
+
+    function entraLogo() {
+        setCarregando(false);
+        navigate("/timeline");
+    }
+
+    function entrando(props) {
+        console.log(props);
+        setUser({
+            ...user,
+            username: props.username,
+            email: props.email,
+            token: props.token,
+            entrou: true,
+        });
+
+        const dadosSerializados = JSON.stringify({
+            username: props.username,
+            email: props.email,
+            token: props.token,
+            entrou: true,
+        });
+        localStorage.setItem("usuario", dadosSerializados);
+        setCarregando(false);
+
+        navigate("/timeline");
+    }
 
     function SubmitData(event) {
         event.preventDefault();
         setCarregando(true);
 
-        console.log("oi");
+        const password40 = password.length > 40;
+
+        if (password40) {
+            return BoxAviso("Password: Maximum length is 40 characters");
+        }
+
+        const URL = API_URL + "/sign-in";
+        const promise = axios.post(URL, {
+            email,
+            password,
+        });
+        promise.then((response) => {
+            entrando(response.data);
+        });
+        promise.catch((err) => {
+            const mensagem =
+                typeof err.response.data === "undefined"
+                    ? "Servidor desconectado"
+                    : err.response.data;
+            BoxAviso(mensagem);
+            setCarregando(false);
+        });
     }
+
+    useEffect(() => {
+        if (localStorage.getItem("usuario")) {
+            entraLogo();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <Container>
@@ -57,7 +127,7 @@ function SignIn() {
             >
                 <FirstTime>First time? Create an account!</FirstTime>
             </Link>
-            {/* {mostraAviso.map((i) => i)} */}
+            {mostraAviso.map((i) => i)}
         </Container>
     );
 }
