@@ -3,9 +3,9 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import SignIn from "./SignIn";
-import SignOut from "./SignOut";
+import SignUp from "./SignUp";
 
-function TelaSignInOut() {
+function TelaSignInUp() {
     const currentRoute = useLocation().pathname;
 
     return (
@@ -21,7 +21,7 @@ function TelaSignInOut() {
                 </LeftText>
             </LeftSide>
             <RightSide>
-                {currentRoute === "/" ? <SignIn /> : <SignOut />}
+                {currentRoute === "/" ? <SignIn /> : <SignUp />}
             </RightSide>
         </Container>
     );
@@ -65,4 +65,4 @@ const RightSide = styled.div`
     background-color: var(--cor-fundo-tela);
 `;
 
-export default TelaSignInOut;
+export default TelaSignInUp;

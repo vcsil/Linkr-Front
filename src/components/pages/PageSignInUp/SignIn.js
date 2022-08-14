@@ -3,11 +3,11 @@ import { Bars } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function SignOut() {
+import Aviso from "../../Aviso";
+
+function SignIn() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [username, setUsername] = useState("");
-    const [pictureUrl, setpictureUrl] = useState("");
     const [carregando, setCarregando] = useState(false);
 
     function SubmitData(event) {
@@ -38,24 +38,6 @@ function SignOut() {
                     disabled={carregando}
                     required
                 />
-                <input
-                    placeholder="username"
-                    type="name"
-                    id="name"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    disabled={carregando}
-                    required
-                />
-                <input
-                    placeholder="picture url"
-                    type="url"
-                    id="url"
-                    value={pictureUrl}
-                    onChange={(e) => setpictureUrl(e.target.value)}
-                    disabled={carregando}
-                    required
-                />
                 <Botao type="submit" disabled={carregando}>
                     {carregando ? (
                         <Bars
@@ -65,15 +47,15 @@ function SignOut() {
                             ariaLabel="loading"
                         />
                     ) : (
-                        <p>Sign Up</p>
+                        <p>Log In</p>
                     )}
                 </Botao>
             </form>
             <Link
-                to={carregando ? "#" : "/"}
+                to={carregando ? "#" : "/sign-up"}
                 style={{ textDecoration: "none" }}
             >
-                <FirstTime>Switch back to log in</FirstTime>
+                <FirstTime>First time? Create an account!</FirstTime>
             </Link>
             {/* {mostraAviso.map((i) => i)} */}
         </Container>
@@ -81,7 +63,7 @@ function SignOut() {
 }
 
 const Container = styled.div`
-    margin: 24% 54px 0 52px;
+    margin: 40% 54px 0 52px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -107,4 +89,4 @@ const FirstTime = styled.p`
     color: var(--cor-branco);
 `;
 
-export default SignOut;
+export default SignIn;
