@@ -28,6 +28,7 @@ export default function App() {
                 <Route path="/hashtag" element={<Hashtag />} />
                 {/* fim route created only for tests */}
                 <Route path="/hashtag/:hashtag" element={<PageHashtag />} />
+                <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
         </BrowserRouter>
     );
