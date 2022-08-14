@@ -139,8 +139,31 @@ const GlobalStyle = createGlobalStyle`
     }
 
     button:hover {
-        filter: brightness(0.9);
+        filter: brightness(0.8);
     }
+
+    @keyframes scale-in {
+        0% {
+            -webkit-transform: scale(0);
+                    transform: scale(0);
+        }
+        100% {
+            -webkit-transform: scale(1);
+                    transform: scale(1);
+        }
+    }
+
+    @keyframes growDown {
+    0% {
+        transform: scaleY(0)
+    }
+    80% {
+        transform: scaleY(1.1)
+    }
+    100% {
+        transform: scaleY(1)
+    }
+}
 `;
 
 export default GlobalStyle;
