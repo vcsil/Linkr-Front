@@ -55,11 +55,12 @@ const GlobalStyle = createGlobalStyle`
         --cor-vermelho: #AC0000;
         --cor-branco: #FFFFFF;
         --cor-preto: #151515;
-        --cor-azul: #1877F2;
         --cor-post: #171717;
 
         --cor-text: #FFFFFF;
         --cor-hashtag: #B7B7B7;
+        --cor-button: #1877F2;
+        --cor-placeholder: #EFEFEF;
 
         --display-none: none;
         --display-flex: flex;
@@ -123,7 +124,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     button {
-        background: var(--cor-azul);
+        background: var(--cor-button);
         border: 0;
         border-radius: 6px;
     }
@@ -140,6 +141,10 @@ const GlobalStyle = createGlobalStyle`
 
     button:hover {
         filter: brightness(0.8);
+    }
+
+    img {
+        object-fit: cover;
     }
 
     @keyframes scale-in {
