@@ -76,13 +76,13 @@ const GlobalStyle = createGlobalStyle`
         width: 100%;
     }
 
-    body {
+    main {
         width: 100vw;
         height: 100vh;
         background-color: var(--cor-fundo-tela);
     }
 
-    body::-webkit-scrollbar {
+    main::-webkit-scrollbar {
         display: none;
     }
 
