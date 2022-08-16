@@ -43,6 +43,8 @@ function Timeline() {
         const promise = axios.post(URL, body, config);
         promise.then((response) => {
             setCarregando(false);
+            setText("");
+            setUrl("");
             // Atualizar posts
         });
         promise.catch((err) => {
@@ -53,8 +55,6 @@ function Timeline() {
             BoxAviso(mensagem);
             setCarregando(false);
         });
-
-        console.log("enviando mensaginha");
     }
 
     useEffect(() => {
