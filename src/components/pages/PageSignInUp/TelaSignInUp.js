@@ -51,7 +51,7 @@ function TelaSignInUp() {
     );
 }
 
-const Container = styled.body`
+const Container = styled.main`
     background-color: var(--cor-preto);
     display: flex;
 `;
