@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import dotenv from "dotenv";
 import React from "react";
 
-import Hashtag from "./pages/Hashtag.js";
 import PageHashtag from "./pages/PageHashtag.js";
 import TelaSignInUp from "./pages/PageSignInUp/TelaSignInUp.js";
 import GlobalStyle from "./shared/styles/globalStyles.js";
@@ -24,9 +23,6 @@ export default function App() {
                 <Route path="/" element={<TelaSignInUp />} />
                 <Route path="/sign-up" element={<TelaSignInUp />} />
                 <Route path="/timeline" element={<Timeline />} />
-                {/* route created only for tests */}
-                <Route path="/hashtag" element={<Hashtag />} />
-                {/* fim route created only for tests */}
                 <Route path="/hashtag/:hashtag" element={<PageHashtag />} />
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
