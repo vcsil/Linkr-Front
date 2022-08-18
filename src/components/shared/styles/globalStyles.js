@@ -78,9 +78,8 @@ const GlobalStyle = createGlobalStyle`
 
     main {
         width: 100%;
-        height: fit-content;
+        height: 100vh;
         background-color: var(--cor-fundo-tela);
-        padding-bottom: 40px;
     }
 
     main::-webkit-scrollbar {
