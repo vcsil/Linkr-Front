@@ -6,6 +6,14 @@ import styled from "styled-components";
 
 import { AuthContext } from "../../../../providers/Auth";
 
+const objMeta = {
+    url: "https://www.youtube.com/watch?v=NSWSCfpkB6U",
+    title: "CASAGRANDE - Podpah #461",
+    image: "https://i.ytimg.com/vi/NSWSCfpkB6U/hqdefault.jpg",
+    description:
+        "TRYBEConstrua sua carreira em tecnologia na Trybe! Inscreva-se agora: https://www.betrybe.com/casagrande-no-podpah-------------------------------------------...",
+};
+
 function PostUser() {
     const { user } = useContext(AuthContext);
 
@@ -68,6 +76,16 @@ function PostUser() {
                     Muito maneiro esse tutorial de Material UI com React, deem
                     uma olhada! <span>#react</span> <span>#material</span>
                 </p>
+                <MetaData>
+                    <Resume>
+                        <Title>{objMeta.title}</Title>
+                        <Description>{objMeta.description}</Description>
+                        <Url>{objMeta.url}</Url>
+                    </Resume>
+                    <ImageMetaData>
+                        <img src={objMeta.image} alt={objMeta.title} />
+                    </ImageMetaData>
+                </MetaData>
             </BoxPostUser>
         </ContainerPostUser>
     );
@@ -160,7 +178,7 @@ const Comments = styled(Like)`
 `;
 
 const BoxPostUser = styled.div`
-    p {
+    > p {
         font-family: "Lato";
         font-style: normal;
         font-weight: 400;
@@ -171,6 +189,87 @@ const BoxPostUser = styled.div`
     }
     span {
         color: var(--cor-hashtag);
+    }
+`;
+
+const MetaData = styled.div`
+    width: 100%;
+    height: 156px;
+    border: 1px solid #4d4d4d;
+    border-radius: 11px;
+
+    display: flex;
+
+    :hover {
+        filter: brightness(1.3);
+    }
+
+    p:hover {
+        cursor: pointer;
+        filter: brightness(1.3);
+    }
+`;
+
+const Resume = styled.div`
+    padding: 24px 28px 24px 20px;
+
+    p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+    }
+`;
+
+const Title = styled.p`
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #cecece;
+
+    max-width: 250px;
+    height: 38px;
+    margin-bottom: 5px;
+
+    -webkit-line-clamp: 2;
+`;
+
+const Description = styled.p`
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #9b9595;
+
+    max-width: 304px;
+    height: 38px;
+    margin-bottom: 14px;
+
+    -webkit-line-clamp: 3;
+`;
+
+const Url = styled.p`
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #cecece;
+
+    max-width: 303px;
+    height: 13px;
+`;
+
+const ImageMetaData = styled.div`
+    img {
+        border-radius: 0px 12px 13px 0px;
+        width: 154px;
+        height: 100%;
+
+        cursor: pointer;
     }
 `;
 

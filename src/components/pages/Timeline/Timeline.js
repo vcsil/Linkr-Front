@@ -23,6 +23,7 @@ function Timeline() {
                 <PostUser />
                 <NewPosts mostra={false} />
                 <Posts />
+                <Posts />
             </BoxTimeline>
         </ContainerTimeline>
     );
