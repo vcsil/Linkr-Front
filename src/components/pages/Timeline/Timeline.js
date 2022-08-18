@@ -115,7 +115,7 @@ const ContainerTimeline = styled.main`
 
 const BoxContent = styled.div`
     max-width: fit-content;
-`
+`;
 
 const BoxTimeline = styled.div`
     display: flex;
