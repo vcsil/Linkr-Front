@@ -117,17 +117,6 @@ const BoxContent = styled.div`
     max-width: fit-content;
 `
 
-const TitleTimeline = styled.div`
-    font-family: "Oswald";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 43px;
-    line-height: 64px;
-    color: var(--cor-branco);
-    margin-bottom: 44px;
-    width: 100%;
-`;
-
 const BoxTimeline = styled.div`
     display: flex;
     justify-content: center;

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { API_URL } from "./App.js";
@@ -5,7 +6,9 @@ import axios from "axios";
 
 function Hashtag({ hashtag }) {
     return (
-        <span># {hashtag}</span>
+        <Link to={`/hashtag/${hashtag}`}>
+            <span># {hashtag}</span>
+        </Link>
     );
 };
 
@@ -64,9 +67,12 @@ const HashtagList = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    font-family: Lato, sans-serif;
-    font-weight: 700;
-    font-size: 19px;
-    color: #FFFFFF;
-    letter-spacing: 0.05em;
+    span {
+        font-family: Lato, sans-serif;
+        font-weight: 700;
+        font-size: 19px;
+        color: #FFFFFF;
+        letter-spacing: 0.05em;
+    }
+
 `
