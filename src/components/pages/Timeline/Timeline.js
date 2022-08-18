@@ -6,6 +6,8 @@ import axios from "axios";
 import { AuthContext } from "../../../providers/Auth";
 import { API_URL } from "../../App";
 import Aviso from "../../Aviso";
+import Trending from "../../Trending";
+import PageTitle from "../../PageTitle";
 
 function Timeline() {
     const navigate = useNavigate();
@@ -66,35 +68,40 @@ function Timeline() {
 
     return (
         <ContainerTimeline>
-            <BoxTimeline>
-                <TitleTimeline>timeline</TitleTimeline>
-                <PostUser>
-                    <ProfileImg src={user.profile_img_url}></ProfileImg>
-                    <TitlePost>What are you going to share today?</TitlePost>
-                    <PostForm onSubmit={SubmitData}>
-                        <PostInputUrl
-                            placeholder="http://..."
-                            type="url"
-                            id="url"
-                            value={url}
-                            onChange={(e) => setUrl(e.target.value)}
-                            disabled={carregando}
-                            required
-                        />
-                        <PostInputText
-                            placeholder="Awesome article about #javascript"
-                            type="text"
-                            id="text"
-                            value={text}
-                            onChange={(e) => setText(e.target.value)}
-                            disabled={carregando}
-                        />
-                        <Botao type="submit" disabled={carregando}>
-                            {carregando ? <p>Publishing...</p> : <p>Publish</p>}
-                        </Botao>
-                    </PostForm>
-                </PostUser>
-            </BoxTimeline>
+            <BoxContent>
+                <PageTitle>timeline</PageTitle>
+                <BoxTimeline>
+                    <BoxPosts>
+                        <PostUser>
+                            <ProfileImg src={user.profile_img_url}></ProfileImg>
+                            <TitlePost>What are you going to share today?</TitlePost>
+                            <PostForm onSubmit={SubmitData}>
+                                <PostInputUrl
+                                    placeholder="http://..."
+                                    type="url"
+                                    id="url"
+                                    value={url}
+                                    onChange={(e) => setUrl(e.target.value)}
+                                    disabled={carregando}
+                                    required
+                                />
+                                <PostInputText
+                                    placeholder="Awesome article about #javascript"
+                                    type="text"
+                                    id="text"
+                                    value={text}
+                                    onChange={(e) => setText(e.target.value)}
+                                    disabled={carregando}
+                                />
+                                <Botao type="submit" disabled={carregando}>
+                                    {carregando ? <p>Publishing...</p> : <p>Publish</p>}
+                                </Botao>
+                            </PostForm>
+                        </PostUser>
+                    </BoxPosts>
+                    <Trending />
+                </BoxTimeline>
+            </BoxContent>
         </ContainerTimeline>
     );
 }
@@ -106,7 +113,9 @@ const ContainerTimeline = styled.main`
     align-items: center;
 `;
 
-const BoxTimeline = styled.div``;
+const BoxContent = styled.div`
+    max-width: fit-content;
+`
 
 const TitleTimeline = styled.div`
     font-family: "Oswald";
@@ -116,6 +125,18 @@ const TitleTimeline = styled.div`
     line-height: 64px;
     color: var(--cor-branco);
     margin-bottom: 44px;
+    width: 100%;
+`;
+
+const BoxTimeline = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+`;
+
+const BoxPosts = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
 
 const PostUser = styled.div`
