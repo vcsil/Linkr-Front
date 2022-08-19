@@ -1,11 +1,18 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import MenuHeader from "./menuHeader.js";
 
 export default function Header({ entrou }) {
+    const currentRoute = useLocation().pathname;
+    const navigate = useNavigate();
+
     function reiniciaPag() {
-        window.location.reload();
+        if (currentRoute === "/timeline") {
+            window.location.reload();
+        }
+        navigate("/timeline");
     }
 
     return (

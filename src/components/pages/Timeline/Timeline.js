@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
-import { AuthContext } from "../../../providers/Auth";
 import NewPosts from "./Posts/NewPosts";
 import { API_URL } from "../../App";
 import Posts from "./Posts/Posts";
@@ -16,11 +15,10 @@ import Loading from "../../shared/components/Loading";
 function Timeline() {
     const navigate = useNavigate();
 
-    const { user, setUser } = useContext(AuthContext);
-
     const [carregando, setCarregando] = useState(false);
     const [mostraAviso, setMostraAviso] = useState([]);
     const [getPosts, setGetPosts] = useState([]);
+    const [atualiza, setAtualiza] = useState(false);
 
     function BoxAviso(mensagem) {
         setMostraAviso([
@@ -63,26 +61,30 @@ function Timeline() {
         }
         navigate("/");
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [atualiza]);
 
     return (
         <ContainerTimeline>
             <BoxContent>
                 <PageTitle>timeline</PageTitle>
-            <BoxTimeline>
-              <BoxPosts>
-                <PostUser />
-                <NewPosts mostra={false} />
-                {carregando ? (
-                    <Loading />
-                ) : (
-                    getPosts?.map((obj) => (
-                        <Posts key={obj.postId} objetoPost={obj} />
-                    ))
-                )}
-              </BoxPosts>
-              <Trending />
-            </BoxTimeline>
+                <BoxTimeline>
+                    <BoxPosts>
+                        <PostUser
+                            atualiza={atualiza}
+                            setAtualiza={setAtualiza}
+                            postCarregando={carregando}
+                        />
+                        <NewPosts mostra={false} />
+                        {carregando ? (
+                            <Loading />
+                        ) : (
+                            getPosts?.map((obj) => (
+                                <Posts key={obj.postId} objetoPost={obj} />
+                            ))
+                        )}
+                    </BoxPosts>
+                    <Trending />
+                </BoxTimeline>
             </BoxContent>
             {mostraAviso.map((i) => i)}
         </ContainerTimeline>

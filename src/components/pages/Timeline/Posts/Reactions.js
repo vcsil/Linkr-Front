@@ -32,7 +32,7 @@ const BoxReactions = styled.div`
 
     position: absolute;
     top: 86px;
-    left: 12px;
+    left: 25px;
 `;
 
 const Comments = styled.div`
@@ -58,5 +58,3 @@ const Comments = styled.div`
         color: var(--cor-branco);
     }
 `;
-
-export default Reactions;
