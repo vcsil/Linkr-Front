@@ -7,7 +7,6 @@ import Actions from "./Actions";
 import Reactions from "./Reactions";
 
 function PostUser({ objetoPost }) {
-    console.log(objetoPost);
     const { authorInfo, text, objMeta, likesCount } = objetoPost;
 
     const { user } = useContext(AuthContext);
