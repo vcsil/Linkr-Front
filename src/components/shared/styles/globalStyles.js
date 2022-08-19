@@ -72,6 +72,10 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
     }
 
+    a:hover {
+        opacity: 0.8;
+    }
+
     .root {
         width: 100%;
     }
@@ -81,7 +85,6 @@ const GlobalStyle = createGlobalStyle`
         height: 100%;
         min-height: 100vh;
         background-color: var(--cor-fundo-tela);
-        padding-bottom: 40px;
     }
 
     main::-webkit-scrollbar {

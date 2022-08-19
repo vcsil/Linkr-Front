@@ -6,7 +6,7 @@ import { AuthContext } from "../../../providers/Auth";
 import { API_URL } from "../../App";
 import Aviso from "../../Aviso";
 
-function PostUser() {
+function PostUser({ atualiza, setAtualiza, postCarregando }) {
     const { user } = useContext(AuthContext);
 
     const [url, setUrl] = useState("");
@@ -39,10 +39,11 @@ function PostUser() {
 
         const promise = axios.post(URL, body, config);
         promise.then((response) => {
+            // Atualizar posts
             setCarregando(false);
             setText("");
             setUrl("");
-            // Atualizar posts
+            setAtualiza(!atualiza);
         });
         promise.catch((err) => {
             const mensagem =
@@ -75,7 +76,7 @@ function PostUser() {
                     onChange={(e) => setText(e.target.value)}
                     disabled={carregando}
                 />
-                <Botao type="submit" disabled={carregando}>
+                <Botao type="submit" disabled={carregando || postCarregando}>
                     {carregando ? <p>Publishing...</p> : <p>Publish</p>}
                 </Botao>
             </PostForm>

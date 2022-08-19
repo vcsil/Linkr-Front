@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Bars } from "react-loader-spinner";
 import styled from "styled-components";
 import axios from "axios";
 
@@ -11,6 +10,7 @@ import PostUser from "./PostUser";
 import Aviso from "../../Aviso";
 import Trending from "../../Trending";
 import PageTitle from "../../PageTitle";
+import Loading from "../../shared/components/Loading";
 
 function Timeline() {
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ function Timeline() {
     const [carregando, setCarregando] = useState(false);
     const [mostraAviso, setMostraAviso] = useState([]);
     const [getPosts, setGetPosts] = useState([]);
+    const [atualiza, setAtualiza] = useState(false);
 
     function BoxAviso(mensagem) {
         setMostraAviso([
@@ -60,7 +61,7 @@ function Timeline() {
         }
         navigate("/");
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [atualiza]);
 
     return (
         <ContainerTimeline>
@@ -68,17 +69,14 @@ function Timeline() {
                 <PageTitle>timeline</PageTitle>
                 <BoxTimeline>
                     <BoxPosts>
-                        <PostUser />
+                        <PostUser
+                            atualiza={atualiza}
+                            setAtualiza={setAtualiza}
+                            postCarregando={carregando}
+                        />
                         <NewPosts mostra={false} />
                         {carregando ? (
-                            <Centraliza>
-                                <Bars
-                                    height="80px"
-                                    width="80px"
-                                    color="white"
-                                    ariaLabel="loading"
-                                />
-                            </Centraliza>
+                            <Loading />
                         ) : (
                             getPosts?.map((obj) => (
                                 <Posts key={obj.postId} objetoPost={obj} />
@@ -113,12 +111,6 @@ const BoxTimeline = styled.div`
 const BoxPosts = styled.div`
     display: flex;
     flex-direction: column;
-`;
-
-const Centraliza = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
 `;
 
 export default Timeline;

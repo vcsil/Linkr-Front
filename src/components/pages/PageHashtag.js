@@ -1,22 +1,30 @@
 import axios from "axios";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { AuthContext } from "../../providers/Auth.js";
 import { API_URL } from "../App.js";
 import Aviso from "../Aviso.js";
 import Trending from "../Trending";
 import PageTitle from "../PageTitle.js";
+import Posts from "./Timeline/Posts/Posts.js";
+import Loading from "../shared/components/Loading.js";
 
 export default function PageHashtag() {
     const navigate = useNavigate();
 
-    const { user } = useContext(AuthContext);
-
     const { hashtag } = useParams();
+
+    const [carregando, setCarregando] = useState(false);
     const [hashtagPosts, setHashtagPosts] = useState([]);
     const [mostraAviso, setMostraAviso] = useState([]);
+
+    useEffect(() => {
+        if (!localStorage.getItem("usuario")) {
+            navigate("/");
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     function BoxAviso(mensagem) {
         setMostraAviso([
@@ -26,10 +34,15 @@ export default function PageHashtag() {
     }
 
     useEffect(() => {
+        setCarregando(true);
+
+        const usuarioLogado = localStorage.getItem("usuario");
+        const { token } = JSON.parse(usuarioLogado);
+
         const URL = `${API_URL}/hashtag/${hashtag}`;
         const config = {
             headers: {
-                Authorization: `Bearer ${user.token}`,
+                Authorization: `Bearer ${token}`,
             }
         };
 
@@ -37,7 +50,7 @@ export default function PageHashtag() {
             .get(URL, config)
             .then(({ data }) => {
                 setHashtagPosts(data);
-                console.log(data)
+                setCarregando(false);
             })
             .catch((err) => {
                 const mensagem =
@@ -45,15 +58,13 @@ export default function PageHashtag() {
                     ? "Servidor desconectado"
                     : err.response.data;
                 BoxAviso(mensagem);
+                setCarregando(false);
             });
-    }, []);
+    }, [hashtag]);
 
-    useEffect(() => {
-        if (!localStorage.getItem("usuario")) {
-            navigate("/");
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const createHashtagPostsFeed = () => hashtagPosts?.map((obj) => <Posts key={obj.id} objetoPost={obj} />);
+    const hashtagPostsFeed = carregando ? <Loading /> : createHashtagPostsFeed();
+
 
     return(
         <Container>
@@ -61,7 +72,7 @@ export default function PageHashtag() {
                 <PageTitle># {hashtag}</PageTitle>
                 <InnerBox>
                     <BoxPosts>
-
+                        {hashtagPostsFeed}
                     </BoxPosts>
                     <Trending />
                 </InnerBox>
@@ -91,3 +102,5 @@ const BoxPosts = styled.div`
     display: flex;
     flex-direction: column;
 `;
+
+export { Container, BoxContent, InnerBox, BoxPosts };

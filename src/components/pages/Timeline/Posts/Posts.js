@@ -1,10 +1,11 @@
-import ReactHashtag from "@mdnm/react-hashtag";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { AuthContext } from "../../../../providers/Auth";
 import Actions from "./Actions";
 import Reactions from "./Reactions";
+import Hashtag from "../../../Hashtag";
 
 function PostUser({ objetoPost }) {
     const { authorInfo, text, objMeta, likesCount } = objetoPost;
@@ -15,24 +16,28 @@ function PostUser({ objetoPost }) {
 
     return (
         <ContainerPostUser>
-            <ProfileImg src={authorInfo[0].authorImgUrl}></ProfileImg>
-            <NameUser>{authorInfo[0].authorName}</NameUser>
+            <ProfileImg src={authorInfo.authorImgUrl}></ProfileImg>
+            <Link to={`/user/${authorInfo.id}`}>
+            <NameUser>{authorInfo.authorName}</NameUser>
+            </Link>
             <Actions displayBox={donoDoPost ? true : false} />
             <Reactions likesCount={likesCount} />
             <BoxPostUser>
                 <p>
-                    <ReactHashtag>{text}</ReactHashtag>
+                    <Hashtag>{text}</Hashtag>
                 </p>
-                <MetaData>
-                    <Resume>
-                        <Title>{objMeta.title}</Title>
-                        <Description>{objMeta.description}</Description>
-                        <Url>{objMeta.url}</Url>
-                    </Resume>
-                    <ImageMetaData>
-                        <img src={objMeta.image} alt={objMeta.title} />
-                    </ImageMetaData>
-                </MetaData>
+                <a href={objMeta.url} target="_blank">
+                    <MetaData>
+                        <Resume>
+                            <Title>{objMeta.title}</Title>
+                            <Description>{objMeta.description}</Description>
+                            <Url>{objMeta.url}</Url>
+                        </Resume>
+                        <ImageMetaData>
+                            <img src={objMeta.image} alt={objMeta.title} />
+                        </ImageMetaData>
+                    </MetaData>
+                </a>
             </BoxPostUser>
         </ContainerPostUser>
     );
