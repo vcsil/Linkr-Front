@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { AuthContext } from "../../../../providers/Auth";
@@ -16,23 +17,27 @@ function PostUser({ objetoPost }) {
     return (
         <ContainerPostUser>
             <ProfileImg src={authorInfo.authorImgUrl}></ProfileImg>
+            <Link to={`/user/${authorInfo.id}`}>
             <NameUser>{authorInfo.authorName}</NameUser>
+            </Link>
             <Actions displayBox={donoDoPost ? true : false} />
             <Reactions likesCount={likesCount} />
             <BoxPostUser>
                 <p>
                     <Hashtag>{text}</Hashtag>
                 </p>
-                <MetaData>
-                    <Resume>
-                        <Title>{objMeta.title}</Title>
-                        <Description>{objMeta.description}</Description>
-                        <Url>{objMeta.url}</Url>
-                    </Resume>
-                    <ImageMetaData>
-                        <img src={objMeta.image} alt={objMeta.title} />
-                    </ImageMetaData>
-                </MetaData>
+                <a href={objMeta.url} target="_blank">
+                    <MetaData>
+                        <Resume>
+                            <Title>{objMeta.title}</Title>
+                            <Description>{objMeta.description}</Description>
+                            <Url>{objMeta.url}</Url>
+                        </Resume>
+                        <ImageMetaData>
+                            <img src={objMeta.image} alt={objMeta.title} />
+                        </ImageMetaData>
+                    </MetaData>
+                </a>
             </BoxPostUser>
         </ContainerPostUser>
     );

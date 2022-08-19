@@ -72,6 +72,10 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
     }
 
+    a:hover {
+        opacity: 0.8;
+    }
+
     .root {
         width: 100%;
     }
