@@ -81,7 +81,6 @@ const GlobalStyle = createGlobalStyle`
         height: 100%;
         min-height: 100vh;
         background-color: var(--cor-fundo-tela);
-        padding-bottom: 40px;
     }
 
     main::-webkit-scrollbar {
