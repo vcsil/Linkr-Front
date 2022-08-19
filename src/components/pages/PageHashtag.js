@@ -8,15 +8,25 @@ import { API_URL } from "../App.js";
 import Aviso from "../Aviso.js";
 import Trending from "../Trending";
 import PageTitle from "../PageTitle.js";
+import Posts from "./Timeline/Posts/Posts.js";
+import Loading from "../shared/components/Loading.js";
 
 export default function PageHashtag() {
     const navigate = useNavigate();
 
     const { user } = useContext(AuthContext);
-
     const { hashtag } = useParams();
+
+    const [carregando, setCarregando] = useState(false);
     const [hashtagPosts, setHashtagPosts] = useState([]);
     const [mostraAviso, setMostraAviso] = useState([]);
+
+    useEffect(() => {
+        if (!localStorage.getItem("usuario")) {
+            navigate("/");
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     function BoxAviso(mensagem) {
         setMostraAviso([
@@ -26,6 +36,8 @@ export default function PageHashtag() {
     }
 
     useEffect(() => {
+        setCarregando(true);
+
         const URL = `${API_URL}/hashtag/${hashtag}`;
         const config = {
             headers: {
@@ -37,6 +49,7 @@ export default function PageHashtag() {
             .get(URL, config)
             .then(({ data }) => {
                 setHashtagPosts(data);
+                setCarregando(false);
             })
             .catch((err) => {
                 const mensagem =
@@ -44,15 +57,13 @@ export default function PageHashtag() {
                     ? "Servidor desconectado"
                     : err.response.data;
                 BoxAviso(mensagem);
+                setCarregando(false);
             });
-    }, []);
+    }, [hashtag]);
 
-    useEffect(() => {
-        if (!localStorage.getItem("usuario")) {
-            navigate("/");
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    const createHashtagPostsFeed = () => hashtagPosts?.map((obj) => <Posts key={obj.id} objetoPost={obj} />);
+    const hashtagPostsFeed = carregando ? <Loading /> : createHashtagPostsFeed();
+
 
     return(
         <Container>
@@ -60,7 +71,7 @@ export default function PageHashtag() {
                 <PageTitle># {hashtag}</PageTitle>
                 <InnerBox>
                     <BoxPosts>
-
+                        {hashtagPostsFeed}
                     </BoxPosts>
                     <Trending />
                 </InnerBox>

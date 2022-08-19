@@ -77,7 +77,7 @@ function Timeline() {
                     <Loading />
                 ) : (
                     getPosts?.map((obj) => (
-                        <Posts key={obj.postId} objetoPost={obj} />
+                        <Posts key={obj.id} objetoPost={obj} />
                     ))
                 )}
               </BoxPosts>
