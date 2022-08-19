@@ -42,7 +42,7 @@ const BoxReactions = styled.div`
 
     position: absolute;
     top: 86px;
-    left: 12px;
+    left: 25px;
 `;
 
 const Like = styled.div`
@@ -70,6 +70,8 @@ const Like = styled.div`
 `;
 
 const Comments = styled(Like)`
+    display: none;
+
     span {
         max-width: 65px;
     }
