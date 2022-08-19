@@ -37,7 +37,6 @@ export default function PageHashtag() {
             .get(URL, config)
             .then(({ data }) => {
                 setHashtagPosts(data);
-                console.log(data)
             })
             .catch((err) => {
                 const mensagem =
@@ -91,3 +90,5 @@ const BoxPosts = styled.div`
     display: flex;
     flex-direction: column;
 `;
+
+export { Container, BoxContent, InnerBox, BoxPosts };
