@@ -26,7 +26,7 @@ function PostUser({ objetoPost }) {
                 <p>
                     <Hashtag>{text}</Hashtag>
                 </p>
-                <a href={objMeta.url} target="_blank">
+                
                     <MetaData>
                         <Resume>
                             <Title>{objMeta.title}</Title>
@@ -37,7 +37,7 @@ function PostUser({ objetoPost }) {
                             <img src={objMeta.image} alt={objMeta.title} />
                         </ImageMetaData>
                     </MetaData>
-                </a>
+         
             </BoxPostUser>
         </ContainerPostUser>
     );
