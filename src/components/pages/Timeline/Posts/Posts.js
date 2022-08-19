@@ -31,7 +31,7 @@ function PostUser({ objetoPost }) {
                         <Resume>
                             <Title>{objMeta.title}</Title>
                             <Description>{objMeta.description}</Description>
-                            <Url>{objMeta.url}</Url>
+                            <Url></Url>
                         </Resume>
                         <ImageMetaData>
                             <img src={objMeta.image} alt={objMeta.title} />
