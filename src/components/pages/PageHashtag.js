@@ -1,9 +1,8 @@
 import axios from "axios";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { AuthContext } from "../../providers/Auth.js";
 import { API_URL } from "../App.js";
 import Aviso from "../Aviso.js";
 import Trending from "../Trending";
@@ -14,7 +13,6 @@ import Loading from "../shared/components/Loading.js";
 export default function PageHashtag() {
     const navigate = useNavigate();
 
-    const { user } = useContext(AuthContext);
     const { hashtag } = useParams();
 
     const [carregando, setCarregando] = useState(false);
@@ -38,10 +36,13 @@ export default function PageHashtag() {
     useEffect(() => {
         setCarregando(true);
 
+        const usuarioLogado = localStorage.getItem("usuario");
+        const { token } = JSON.parse(usuarioLogado);
+
         const URL = `${API_URL}/hashtag/${hashtag}`;
         const config = {
             headers: {
-                Authorization: `Bearer ${user.token}`,
+                Authorization: `Bearer ${token}`,
             }
         };
 

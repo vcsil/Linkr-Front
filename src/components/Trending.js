@@ -16,10 +16,18 @@ export default function Trending() {
     const [hashtags, setHashtags] = useState([]);
 
     useEffect(() => {
+        const usuarioLogado = localStorage.getItem("usuario");
+        const { token } = JSON.parse(usuarioLogado);
 
         const URL = `${API_URL}/trending`;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        };
+
         axios
-            .get(URL)
+            .get(URL, config)
             .then(({ data }) => {
                 setHashtags(data);
             });

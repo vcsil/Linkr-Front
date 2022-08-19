@@ -26,7 +26,7 @@ export default function App() {
                 <Route path="/sign-up" element={<TelaSignInUp />} />
                 <Route path="/timeline" element={<Timeline />} />
                 <Route path="/hashtag/:hashtag" element={<PageHashtag />} />
-                <Route path="/user/:id" element={<UserPosts />} />
+                <Route path="/user/:userId" element={<UserPosts />} />
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
         </BrowserRouter>
