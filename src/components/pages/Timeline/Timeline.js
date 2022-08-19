@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Bars } from "react-loader-spinner";
 import styled from "styled-components";
 import axios from "axios";
 
-import { AuthContext } from "../../../providers/Auth";
 import NewPosts from "./Posts/NewPosts";
 import { API_URL } from "../../App";
 import Posts from "./Posts/Posts";
@@ -15,8 +14,6 @@ import PageTitle from "../../PageTitle";
 
 function Timeline() {
     const navigate = useNavigate();
-
-    const { user, setUser } = useContext(AuthContext);
 
     const [carregando, setCarregando] = useState(false);
     const [mostraAviso, setMostraAviso] = useState([]);
@@ -69,27 +66,27 @@ function Timeline() {
         <ContainerTimeline>
             <BoxContent>
                 <PageTitle>timeline</PageTitle>
-            <BoxTimeline>
-              <BoxPosts>
-                <PostUser />
-                <NewPosts mostra={false} />
-                {carregando ? (
-                    <Centraliza>
-                        <Bars
-                            height="80px"
-                            width="80px"
-                            color="white"
-                            ariaLabel="loading"
-                        />
-                    </Centraliza>
-                ) : (
-                    getPosts?.map((obj) => (
-                        <Posts key={obj.postId} objetoPost={obj} />
-                    ))
-                )}
-              </BoxPosts>
-              <Trending />
-            </BoxTimeline>
+                <BoxTimeline>
+                    <BoxPosts>
+                        <PostUser />
+                        <NewPosts mostra={false} />
+                        {carregando ? (
+                            <Centraliza>
+                                <Bars
+                                    height="80px"
+                                    width="80px"
+                                    color="white"
+                                    ariaLabel="loading"
+                                />
+                            </Centraliza>
+                        ) : (
+                            getPosts?.map((obj) => (
+                                <Posts key={obj.postId} objetoPost={obj} />
+                            ))
+                        )}
+                    </BoxPosts>
+                    <Trending />
+                </BoxTimeline>
             </BoxContent>
             {mostraAviso.map((i) => i)}
         </ContainerTimeline>
