@@ -1,10 +1,10 @@
-import ReactHashtag from "@mdnm/react-hashtag";
 import React, { useContext } from "react";
 import styled from "styled-components";
 
 import { AuthContext } from "../../../../providers/Auth";
 import Actions from "./Actions";
 import Reactions from "./Reactions";
+import Hashtag from "../../../Hashtag";
 
 function PostUser({ objetoPost }) {
     const { authorInfo, text, objMeta, likesCount } = objetoPost;
@@ -21,7 +21,7 @@ function PostUser({ objetoPost }) {
             <Reactions likesCount={likesCount} />
             <BoxPostUser>
                 <p>
-                    <ReactHashtag>{text}</ReactHashtag>
+                    <Hashtag>{text}</Hashtag>
                 </p>
                 <MetaData>
                     <Resume>
