@@ -1,46 +1,31 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { API_URL } from "./App.js";
-
-const hashtagsExample = [
-    {
-        id: 1,
-        name: "javascript"
-    },
-    {
-        id: 2,
-        name: "react"
-    },
-    {
-        id: 3,
-        name: "react-native"
-    },
-    {
-        id: 4,
-        name: "material"
-    }
-];
+import axios from "axios";
 
 function Hashtag({ hashtag }) {
     return (
-        <span># {hashtag}</span>
+        <Link to={`/hashtag/${hashtag}`}>
+            <span># {hashtag}</span>
+        </Link>
     );
 };
 
 export default function Trending() {
-    // const [hashtags, setHashtags] = useState([]);
+    const [hashtags, setHashtags] = useState([]);
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     const URL = `${API_URL}/trending`;
-    //     axios
-    //         .get(URL)
-    //         .then(({ data }) => {
-    //             setHashtags(data);
-    //         });
-    // }, []);
+        const URL = `${API_URL}/trending`;
+        axios
+            .get(URL)
+            .then(({ data }) => {
+                setHashtags(data);
+            });
+    }, []);
 
-    const createHashtagList = () => hashtagsExample.map(hashtag => <Hashtag key={hashtag.id} hashtag={hashtag.name} />);
+    const createHashtagList = () => hashtags?.map(hashtag => <Hashtag key={hashtag.id} hashtag={hashtag.hashtag} />);
     const hashtagList = createHashtagList();
 
     return (
@@ -61,6 +46,7 @@ const TrendingBox = styled.div`
     box-sizing: border-box;
     background-color: #171717;
     border-radius: 16px;
+    height: fit-content;
 `;
 
 const Title = styled.div`
@@ -81,9 +67,12 @@ const HashtagList = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    font-family: Lato, sans-serif;
-    font-weight: 700;
-    font-size: 19px;
-    color: #FFFFFF;
-    letter-spacing: 0.05em;
+    span {
+        font-family: Lato, sans-serif;
+        font-weight: 700;
+        font-size: 19px;
+        color: #FFFFFF;
+        letter-spacing: 0.05em;
+    }
+
 `

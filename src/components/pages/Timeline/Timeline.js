@@ -10,6 +10,8 @@ import { API_URL } from "../../App";
 import Posts from "./Posts/Posts";
 import PostUser from "./PostUser";
 import Aviso from "../../Aviso";
+import Trending from "../../Trending";
+import PageTitle from "../../PageTitle";
 
 function Timeline() {
     const navigate = useNavigate();
@@ -65,8 +67,10 @@ function Timeline() {
 
     return (
         <ContainerTimeline>
+            <BoxContent>
+                <PageTitle>timeline</PageTitle>
             <BoxTimeline>
-                <TitleTimeline>timeline</TitleTimeline>
+              <BoxPosts>
                 <PostUser />
                 <NewPosts mostra={false} />
                 {carregando ? (
@@ -83,7 +87,10 @@ function Timeline() {
                         <Posts key={obj.postId} objetoPost={obj} />
                     ))
                 )}
+              </BoxPosts>
+              <Trending />
             </BoxTimeline>
+            </BoxContent>
             {mostraAviso.map((i) => i)}
         </ContainerTimeline>
     );
@@ -96,16 +103,19 @@ const ContainerTimeline = styled.main`
     align-items: center;
 `;
 
-const BoxTimeline = styled.div``;
+const BoxContent = styled.div`
+    max-width: fit-content;
+`;
 
-const TitleTimeline = styled.div`
-    font-family: "Oswald";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 43px;
-    line-height: 64px;
-    color: var(--cor-branco);
-    margin-bottom: 44px;
+const BoxTimeline = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+`;
+
+const BoxPosts = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
 
 const Centraliza = styled.div`
