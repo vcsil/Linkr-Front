@@ -1,22 +1,12 @@
-import { AiOutlineHeart, AiOutlineComment } from "react-icons/ai";
-import React from "react";
+import { AiOutlineComment } from "react-icons/ai";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Like from "./Like";
 
-function Reactions({ likesCount }) {
+function Reactions({ likesCount, likedBy, postId }) {
     return (
         <BoxReactions>
-            <Like>
-                <AiOutlineHeart
-                    size="20px"
-                    color="white"
-                    cursor="pointer"
-                    onMouseOver={({ target }) =>
-                        (target.style.color = "lightgray")
-                    }
-                    onMouseOut={({ target }) => (target.style.color = "white")}
-                />
-                <span>{likesCount} likes</span>
-            </Like>
+            <Like likesCount={likesCount} likedBy={likedBy} postId={postId} />
             <Comments>
                 <AiOutlineComment
                     size="20px"
@@ -45,13 +35,13 @@ const BoxReactions = styled.div`
     left: 12px;
 `;
 
-const Like = styled.div`
+const Comments = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
 
     span {
-        max-width: 40px;
+        max-width: 65px;
         text-align: center;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -66,12 +56,6 @@ const Like = styled.div`
         line-height: 13px;
         text-align: center;
         color: var(--cor-branco);
-    }
-`;
-
-const Comments = styled(Like)`
-    span {
-        max-width: 65px;
     }
 `;
 

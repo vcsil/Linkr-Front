@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { AuthContext } from "../../../../providers/Auth";
@@ -8,24 +8,28 @@ import Reactions from "./Reactions";
 import Hashtag from "../../../Hashtag";
 
 function PostUser({ objetoPost }) {
-    const { authorInfo, text, objMeta, likesCount } = objetoPost;
+    const { postId, authorInfo, text, objMeta, likesCount, likedBy } = objetoPost;
 
     const { user } = useContext(AuthContext);
 
-    const donoDoPost = user.username === authorInfo;
+    const donoDoPost = user.username === authorInfo.authorName;
 
     return (
         <ContainerPostUser>
-            <ProfileImg src={authorInfo.authorImgUrl}></ProfileImg>
             <Link to={`/user/${authorInfo.id}`}>
-            <NameUser>{authorInfo.authorName}</NameUser>
+                <ProfileImg src={authorInfo.authorImgUrl}></ProfileImg>
+            </Link>
+            <Link to={`/user/${authorInfo.id}`}>
+                <BoxName>
+                    <NameUser>{authorInfo.authorName}</NameUser>
+                </BoxName>
             </Link>
             <Actions displayBox={donoDoPost ? true : false} />
-            <Reactions likesCount={likesCount} />
+            <Reactions likesCount={likesCount} likedBy={likedBy} postId={postId} />
             <BoxPostUser>
-                <p>
+                <BoxText>
                     <Hashtag>{text}</Hashtag>
-                </p>
+                </BoxText>
                 <a href={objMeta.url} target="_blank">
                     <MetaData>
                         <Resume>
@@ -64,7 +68,12 @@ const ProfileImg = styled.img`
     cursor: pointer;
 `;
 
-const NameUser = styled.p`
+const BoxName = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const NameUser = styled.span`
     margin-top: 6px;
     font-family: "Lato";
     font-style: normal;
@@ -72,7 +81,6 @@ const NameUser = styled.p`
     font-size: 19px;
     line-height: 23px;
     color: var(--cor-branco);
-    margin-bottom: 10px;
     cursor: pointer;
 `;
 
@@ -92,12 +100,22 @@ const BoxPostUser = styled.div`
     }
 `;
 
+const BoxText = styled.div`
+    margin-top: 8px;
+    font-family: "Lato";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 20px;
+    color: var(--cor-text);
+`;
+
 const MetaData = styled.div`
     width: 100%;
     height: 156px;
     border: 1px solid #4d4d4d;
     border-radius: 11px;
-
+    margin-top: 12px;
     display: flex;
     position: relative;
 

@@ -7,7 +7,7 @@ export default function Hashtag({ children }) {
             renderHashtag={(hashtagValue) => {
                 const hashtag = hashtagValue.slice(1).toLowerCase();
                 return (
-                    <StyledHashtag href={`/hashtag/${hashtag}`}>
+                    <StyledHashtag key={hashtag} href={`/hashtag/${hashtag}`}>
                         {hashtagValue}
                     </StyledHashtag>
                 )}
