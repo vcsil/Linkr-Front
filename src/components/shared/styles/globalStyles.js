@@ -55,10 +55,10 @@ const GlobalStyle = createGlobalStyle`
         --cor-vermelho: #AC0000;
         --cor-branco: #FFFFFF;
         --cor-preto: #151515;
-        --cor-post: #171717;
 
-        --cor-text: #FFFFFF;
-        --cor-hashtag: #B7B7B7;
+        --cor-post: #171717;
+        --cor-text: #B7B7B7;
+        --cor-hashtag: #FFFFFF;
         --cor-button: #1877F2;
         --cor-placeholder: #EFEFEF;
 
@@ -78,8 +78,10 @@ const GlobalStyle = createGlobalStyle`
 
     main {
         width: 100%;
-        height: 100vh;
+        height: 100%;
+        min-height: 100vh;
         background-color: var(--cor-fundo-tela);
+        padding-bottom: 40px;
     }
 
     main::-webkit-scrollbar {

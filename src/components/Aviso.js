@@ -2,41 +2,67 @@
 import styled from "styled-components";
 import React from "react";
 
-function Aviso({ mensagem, sim, nao, ok }) {
+import { AuthContext } from "../providers/Auth.js";
+
+function UmBotao({ ok }) {
     return (
-        <ContainerAviso>
-            <BoxAviso>
-                <h2>{mensagem}</h2>
-                {ok ? (
-                    <Botao>
-                        <button
-                            type="button"
-                            onClick={ok}
-                            style={{ backgroundColor: "var(--cor-fundo-tela)" }}
-                        >
-                            Ok
-                        </button>
-                    </Botao>
-                ) : (
-                    <Botoes>
-                        <button
-                            type="button"
-                            onClick={nao}
-                            style={{ backgroundColor: "red" }}
-                        >
-                            Não
-                        </button>
-                        <button
-                            type="button"
-                            onClick={sim}
-                            style={{ backgroundColor: "green" }}
-                        >
-                            Sim
-                        </button>
-                    </Botoes>
-                )}
-            </BoxAviso>
-        </ContainerAviso>
+        <Botao>
+            <button
+                type="button"
+                onClick={ok}
+                style={{
+                    backgroundColor: "var(--cor-fundo-tela)",
+                }}
+            >
+                Ok
+            </button>
+        </Botao>
+    );
+}
+
+function DoisBotoes({ nao, sim }) {
+    return (
+        <Botoes>
+            <button
+                type="button"
+                onClick={nao}
+                style={{ backgroundColor: "red" }}
+            >
+                Não
+            </button>
+            <button
+                type="button"
+                onClick={sim}
+                style={{ backgroundColor: "green" }}
+            >
+                Sim
+            </button>
+        </Botoes>
+    );
+}
+
+function Aviso({ mensagem, sim, nao, ok }) {
+    const { user } = React.useContext(AuthContext);
+
+    const name = user?.username;
+
+    const montarBotoes = () =>
+        ok ? <UmBotao ok={ok} /> : <DoisBotoes sim={sim} nao={nao} />;
+    const bottoes = montarBotoes();
+
+    return (
+        <>
+            <ContainerAviso>
+                <BoxAviso>
+                    <h2>
+                        {name}
+                        <br />
+                        {mensagem}
+                    </h2>
+                    {bottoes}
+                </BoxAviso>
+            </ContainerAviso>
+        </>
     );
 }
 
@@ -69,6 +95,8 @@ const BoxAviso = styled.div`
     animation: scale-in 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     h2 {
+        font-family: "Lato";
+        font-style: normal;
         font-size: 24px;
         text-align: center;
         line-height: 28px;

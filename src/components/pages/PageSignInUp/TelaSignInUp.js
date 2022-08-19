@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
@@ -11,9 +11,17 @@ function TelaSignInUp() {
     const timeWindowWelcome = 1000;
 
     const [welcome, setWelcome] = useState(true);
-    setInterval(() => {
-        setWelcome(false);
-    }, timeWindowWelcome);
+
+    // Evitar atualizar componente com ele desmontado
+    useEffect(() => {
+        let abortController = new AbortController();
+        setInterval(() => {
+            setWelcome(false);
+        }, timeWindowWelcome);
+        return () => {
+            abortController.abort();
+        };
+    }, []);
 
     return (
         <Container>
