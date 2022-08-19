@@ -39,8 +39,12 @@ function Timeline() {
 
         const promise = axios.get(URL, config);
         promise.then((response) => {
-            setGetPosts(response.data);
-            setCarregando(false);
+            if (response.data.length > 0) {
+                setGetPosts(response.data);
+                setCarregando(false);
+                return;
+            }
+            BoxAviso("There are no posts yet");
         });
         promise.catch((err) => {
             const mensagem =
@@ -79,7 +83,14 @@ function Timeline() {
                             <Loading />
                         ) : (
                             getPosts?.map((obj) => (
-                                <Posts key={obj.postId} objetoPost={obj} />
+                                <Posts
+                                    key={obj.postId}
+                                    objetoPost={obj}
+                                    atualiza={atualiza}
+                                    setAtualiza={setAtualiza}
+                                    mostraAviso={mostraAviso}
+                                    setMostraAviso={setMostraAviso}
+                                />
                             ))
                         )}
                     </BoxPosts>
