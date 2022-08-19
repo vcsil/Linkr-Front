@@ -50,7 +50,7 @@ function PostUser({
                             <img src={objMeta.image} alt={objMeta.title} />
                         </ImageMetaData>
                     </MetaData>
-                </a>
+          </a>
             </BoxPostUser>
         </ContainerPostUser>
     );
