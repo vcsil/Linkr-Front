@@ -16,8 +16,8 @@ function PostUser({ objetoPost }) {
 
     return (
         <ContainerPostUser>
-            <ProfileImg src={authorInfo[0].authorImgUrl}></ProfileImg>
-            <NameUser>{authorInfo[0].authorName}</NameUser>
+            <ProfileImg src={authorInfo.authorImgUrl}></ProfileImg>
+            <NameUser>{authorInfo.authorName}</NameUser>
             <Actions displayBox={donoDoPost ? true : false} />
             <Reactions likesCount={likesCount} />
             <BoxPostUser>
