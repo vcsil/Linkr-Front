@@ -7,26 +7,39 @@ import Actions from "./Actions";
 import Reactions from "./Reactions";
 import Hashtag from "../../../Hashtag";
 
-function PostUser({ objetoPost }) {
-    const { authorInfo, text, objMeta, likesCount } = objetoPost;
+function PostUser({
+    atualiza,
+    setAtualiza,
+    objetoPost,
+    mostraAviso,
+    setMostraAviso,
+}) {
+    const { authorInfo, text, objMeta, likesCount, postId } = objetoPost;
 
     const { user } = useContext(AuthContext);
 
-    const donoDoPost = user.username === authorInfo;
+    const donoDoPost = user.username === authorInfo.authorName;
 
     return (
         <ContainerPostUser>
             <ProfileImg src={authorInfo.authorImgUrl}></ProfileImg>
             <Link to={`/user/${authorInfo.id}`}>
-            <NameUser>{authorInfo.authorName}</NameUser>
+                <NameUser>{authorInfo.authorName}</NameUser>
             </Link>
-            <Actions displayBox={donoDoPost ? true : false} />
+            <Actions
+                displayBox={donoDoPost ? true : false}
+                postId={postId}
+                atualiza={atualiza}
+                setAtualiza={setAtualiza}
+                mostraAviso={mostraAviso}
+                setMostraAviso={setMostraAviso}
+            />
             <Reactions likesCount={likesCount} />
             <BoxPostUser>
                 <p>
                     <Hashtag>{text}</Hashtag>
                 </p>
-                <a href={objMeta.url} target="_blank">
+                <a href={objMeta.url} target="_blank" rel="noreferrer">
                     <MetaData>
                         <Resume>
                             <Title>{objMeta.title}</Title>
